@@ -1,4 +1,4 @@
-var dataP = d3.json("colors.csv");
+var dataP = d3.csv("colors.csv");
 
 var drawChart = function(colorData)
 {
