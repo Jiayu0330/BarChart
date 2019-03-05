@@ -1,6 +1,6 @@
 var dataP = d3.json("colors.csv");
 
-var drawChart = function(colorData)
+var drawChart = function((colorData)
 {
   var width = 400;
   var height = 200;
@@ -30,8 +30,8 @@ var drawChart = function(colorData)
      .fill("color"，function(d)
      {
        return d.color;
-     });
-}
+     })
+});
 
 dataP.then(function(data)
 {
