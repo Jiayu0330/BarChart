@@ -30,7 +30,7 @@ var drawChart = function(colorData)
      .fill("color"，function(d)
      {
        return d.color;
-     })
+     });
 }
 
 dataP.then(function(data)
