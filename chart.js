@@ -36,7 +36,7 @@ var drawChart = function(colorData)
 dataP.then(function(data)
 {
   console.log("data",data)
-  drawChart(dara);
+  drawChart(data);
 },
 function(err)
 {
