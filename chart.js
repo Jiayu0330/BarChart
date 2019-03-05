@@ -19,10 +19,10 @@ var drawChart = function(colorData)
      {
        return i * barWidth;
      })
-     /*.attr("y",function(d)
+     .attr("y",function(d)
      {
        return height - d.num*10;
-     })*/
+     })
      .attr("width",barWidth)
      .attr("height",function(d)
      {
@@ -32,7 +32,31 @@ var drawChart = function(colorData)
      {
        return d.color;
      })
+
+  svg.selectAll("text")
+     .data(colorData)
+     .enter()
+     .append("text")
+     .text(function(d)
+     {
+       return d.num;
+     })
+     .attr("x",function(d,i)
+     {
+       return i * barWidth + 24;
+     })
+     .attr("y",function(d)
+     {
+       return height - d.num*11;
+     })
+
+  var legend = svg.append("g")
+                  .attr("x",100)
+                  .attr("y",100)
+                  .attr("width",20)
+                  .attr("height",20)
 }
+
 
 dataP.then(function(data)
 {
