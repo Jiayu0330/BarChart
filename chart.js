@@ -18,10 +18,10 @@ var drawChart = function(colorData)
      {
        return i * barWidth;
      })
-     .attr("y",function(d)
+     /*.attr("y",function(d)
      {
        return height - d.num*10;
-     })
+     })*/
      .attr("width",barWidth)
      .attr("height",function(d)
      {
