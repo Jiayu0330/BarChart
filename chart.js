@@ -6,6 +6,7 @@ var drawChart = function(colorData)
   var height = 200;
   var barWidth = width/colorData.length;
 
+  console.log(barWidth);
   var svg = d3.select("svg")
               .attr("width",width)
               .attr("height",height);
