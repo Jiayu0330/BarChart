@@ -27,7 +27,7 @@ var drawChart = function(colorData)
      {
        return d.num*10;
      })
-     .fill("color"，function(d)
+     .fill("color",function(d)
      {
        return d.color;
      })
