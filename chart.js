@@ -16,22 +16,22 @@ var drawChart = function(colorData)
      .append("rect")
      .attr("x",function(d,i)
      {
-       return i = barWidth;
+       return i * barWidth;
      })
      .attr("y",function(d)
      {
-       return height = d.num*10;
+       return height - d.num*10;
      })
      .attr("width",barWidth)
      .attr("height",function(d)
      {
        return d.num*10;
      })
-     .fill("color",function(d)
+     .attr("fill",function(d)
      {
        return d.color;
      })
-};
+}
 
 dataP.then(function(data)
 {
