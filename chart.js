@@ -1,15 +1,26 @@
 var dataP = d3.csv("colors.csv");
+var dataP2 = d3.json("colors.json");
+dataSet = [dataP, dataP2];
 
-var drawChart = function(colorData)
+var types = [".csv", ".json"]
+var svgs = [];
+
+var width = 400;
+var height = 300;
+
+types.forEach(function(d)
 {
-  var width = 400;
-  var height = 200;
-  var barWidth = width/colorData.length;
-
-  console.log(barWidth);
-  var svg = d3.select("svg")
-              .attr("width",width)
+  var svg = d3.select(d)
+              .attr("width",width + 200)
               .attr("height",height);
+
+   svgs.push(svg);
+});
+
+
+var drawChart = function(colorData,svg)
+{
+  var barWidth = width/colorData.length;
 
   svg.selectAll("rect")
      .data(colorData)
@@ -21,17 +32,20 @@ var drawChart = function(colorData)
      })
      .attr("y",function(d)
      {
-       return height - d.num*10;
+       return height - d.num*20;
      })
      .attr("width",barWidth)
      .attr("height",function(d)
      {
-       return d.num*10;
+       return d.num*20;
      })
      .attr("fill",function(d)
      {
        return d.color;
      })
+     .attr("stroke","white")
+     .attr("stroke-width",2);
+
 
   svg.selectAll("text")
      .data(colorData)
@@ -45,25 +59,59 @@ var drawChart = function(colorData)
      {
        return i * barWidth + 24;
      })
-     .attr("y",function(d)
+     .attr("y",function(d,i)
      {
-       return height - d.num*11;
-     })
+       return height - d.num*21;
+     });
 
+/*Add legend*/
   var legend = svg.append("g")
-                  .attr("x",100)
-                  .attr("y",100)
-                  .attr("width",20)
-                  .attr("height",20)
+
+  legend.selectAll("rect")
+        .data(colorData)
+        .enter()
+        .append("rect")
+        .attr("x",function()
+        {
+          return 455;
+        })
+        .attr("y", function(d,i)
+        {
+          return 167 + i*20;
+        })
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("fill",function(d)
+        {
+          return d.color;
+        })
+
+  legend.selectAll("text")
+        .data(colorData)
+        .enter()
+        .append("text")
+        .text(function(d)
+        {
+          return d.color;
+        })
+        .attr("x", function()
+        {
+          return 470;
+        })
+        .attr("y", function(d,i)
+        {
+          return 177 + i*20
+        });
 }
 
-
-dataP.then(function(data)
+dataSet.forEach(function(d,i)
 {
-  console.log("data",data)
-  drawChart(data);
+  d.then(function(data)
+  {
+    drawChart(data,svgs[i]);
+  });
 },
 function(err)
 {
-  console.log(err)
+  console.log(err);
 });
